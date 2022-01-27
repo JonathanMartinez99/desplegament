@@ -1,0 +1,13 @@
+{% extends "public_base.njk" %}
+{% block titulo %}Inicio | Peliculas{% endblock %}
+{% block contenido %}
+
+<div class="container-fluid">
+    {% if(error) %}
+        <p>{{error}}</p>
+    {% else %}
+        <p>ERROR EN LA APLICACIÓ</p>
+    {% endif %}
+</div>
+
+{% endblock %}

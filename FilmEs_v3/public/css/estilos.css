@@ -1,0 +1,32 @@
+#admin{
+    margin-left: -80px;
+}
+
+#form-buscar label{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 200%;
+}
+
+#form-buscar input{
+    text-align: center;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+table.tablaPeli, td, tr{
+    border: 1px solid black;
+    text-align: center;
+}
+
+table.tablaPeli{
+    margin-top: 50px;
+}
+
+tr.encabezado{
+    background-color: rgb(184, 182, 182);
+}
+
+label.labelDirectores{
+    margin-left: 50px;
+}

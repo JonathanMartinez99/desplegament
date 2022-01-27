@@ -1,0 +1,48 @@
+{% extends "public_base.njk" %}
+{% block titulo %}Inicio | Peliculas{% endblock %}
+{% block contenido %}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <form id="form-buscar" action="/buscar" method="get">
+            <div class="row">
+                <label id="texto-buscar">Nom de la pel.lícula</label>
+                <input name="titulo" type="text" required>
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+{% if(error) %}
+    <div class="row">
+        <p>{{error}}</p>
+    </div>
+{% endif %}
+
+{% if(peliculas.length > 0) %}
+    <div class="row">
+        <table class="tablaPeli" width="100%">
+            <tr class="encabezado">
+                <td><b>Titol</b></td>
+                <td><b>Genere</b></td>
+                <td><b>Duracio(min)</b></td>
+                <td><b>Plataforma</b></td>
+                <td><b>Valoracio</b></td>
+            </tr>
+            {% for pelicula in peliculas %}
+                <tr>
+                    <td><a href="/pelicula/{{pelicula.id}}">{{pelicula.titol}}</a></td>
+                    <td>{{pelicula.genere}}</td>
+                    <td>{{pelicula.duracio}}</td>
+                    <td>{{pelicula.plataforma.nom}}</td>
+                    <td>{{pelicula.valoracio}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+
+</div>
+
+{% endblock %}
