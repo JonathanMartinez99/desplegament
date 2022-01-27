@@ -53,7 +53,7 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use('/', enrutadorPublico);
 app.use('/pelicules', enrutadorPelicula);
 app.use('/directors', enrutadorDirector);
-app.use('/login', enrutadorUsuario);
+app.use('/', enrutadorUsuario);
 
    
 

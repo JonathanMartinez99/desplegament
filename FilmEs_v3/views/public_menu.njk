@@ -3,10 +3,15 @@
             <div class="alert alert-secondary">
                 <a class="btn btn-dark" href="/">Inicio</a>
                 &nbsp;&nbsp;
-                <a class="btn btn-dark" href="/pelicules">Administracion</a>
-                &nbsp;&nbsp;
-                <a class="btn btn-dark" href="/login">Login</a>
-                &nbsp;&nbsp;
+                {% if (session and session.usuario) %}
+                    <a class="btn btn-dark" href="/pelicules">Administracion</a>
+                    &nbsp;&nbsp;
+                    <a class="btn btn-dark" href="/logout">Logout</a>
+                    &nbsp;&nbsp;
+                {% else %}
+                    <a class="btn btn-dark" href="/login">Login</a>
+                    &nbsp;&nbsp;
+                {% endif %}
             </div>
     </div>
 </nav>

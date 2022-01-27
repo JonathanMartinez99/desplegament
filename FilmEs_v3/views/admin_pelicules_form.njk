@@ -2,9 +2,63 @@
 {% block titulo %}Inicio | Peliculas{% endblock %}
 {% block contenido %}
 
+    {% if(pelicula) %}
+    <h1>Editar pel.licula</h1>
+
+    <form action="/pelicules/{{pelicula.id}}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="put" />
+        <div class="form-group">
+            <label for="titol">Titol:</label>
+            <input type="text" class="form-control" name="titol" value="{{pelicula.titol}}"
+                placeholder="Titol de la pel.licula..." />
+        </div>
+        <div class="form-group">
+            <label for="sinopsi">Sinopsi:</label>
+            <input type="text" class="form-control" name="sinopsi" value="{{pelicula.sinopsi}}"
+                placeholder="Sinopsi de la pel.licula..." />
+        </div>
+        <div class="form-group">
+            <label for="duracio">Duracio:</label>
+            <input type="number" class="form-control" name="duracio" value="{{pelicula.duracio}}"
+                placeholder="Duracio de la pel.licula..." />
+        </div>
+        <div class="form-group">
+            <label for="valoracio">Valoracio:</label>
+            <input type="number" class="form-control" name="valoracio" value="{{pelicula.valoracio}}"
+                placeholder="Valoracio de la pel.licula..." />
+        </div>
+        <div class="form-group" style="margin:10px 0px 10px 0px">
+            <label for="genere">Genere:</label>
+            <select name="genere">
+                <option value="comedia">Comedia</option>
+                <option value="terror">Terror</option>
+                <option value="drama">Drama</option>
+                <option value="aventures">Aventures</option>
+                <option value="altres">Altres</option>
+            </select>
+
+            <label class="labelDirectores" for="director">Director:</label>
+            <select name="director">
+                <option value="61e698e0e67fd25fd5a8ceb1">Martin Scorsese</option>
+                <option value="61e698e0e67fd25fd5a8ceb3">Steven Spielberg</option>
+                <option value="61e698e0e67fd25fd5a8ceb4">Quentin Tarantino</option>
+                <option value=""61e698e0e67fd25fd5a8ceb2">Tim Burton</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="imatge">Imatge:</label>
+            <input type="file" class="form-control" name="imatge"
+                placeholder="Imatge de la pel.licula..." />
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    {% else %}
+    
 <h1>Insertar pel.licula</h1>
 
-    <form action="/pelicules" method="post">
+    <form action="/pelicules" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="titol">Titol:</label>
             <input type="text" class="form-control" name="titol" 
@@ -52,5 +106,7 @@
         
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+
+    {% endif %}
 
 {% endblock %}

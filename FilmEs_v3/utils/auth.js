@@ -1,10 +1,9 @@
-const session = require('express-session');
 
 let autenticacion = (req, res, next) => {
     if (req.session && req.session.usuario)
     return next();
     else
-    res.render('login');
+    res.render('auth_login');
 };
 
 module.exports = {
