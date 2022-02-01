@@ -60,7 +60,12 @@ router.post('/', upload.single('imatge'), auth.autenticacion, (request, response
         valoracio:request.body.valoracio,
         genere:request.body.genere,
         director:request.body.director,
-        imatge:request.file.filename
+        imatge:request.file.filename,
+        plataforma:{
+            nom: request.body.nomPlataforma,
+            data: request.body.data,
+            quantitat: request.body.quantitat
+        }
     });
 
     nuevaPelicula.save().then(resultado =>{

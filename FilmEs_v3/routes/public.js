@@ -21,7 +21,7 @@ router.get('/buscar', (request, response) =>{
 });
 
 router.get('/pelicula/:id', (request, response) =>{
-    Pelicula.findById(request.params.id).then(resultado=>{
+    Pelicula.findById(request.params.id).populate('director').then(resultado=>{
         if(resultado){
             response.render('public_pelicula', {pelicula:resultado});
         }

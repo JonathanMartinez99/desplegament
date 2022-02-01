@@ -2,8 +2,29 @@
 {% block titulo %}Inicio | Peliculas{% endblock %}
 {% block contenido %}
 
-<div class="container-fluid">
-    <p>{{pelicula.titol}}</p>
+<div class="container">
+    <div class="row">
+        <h1>{{pelicula.titol}}</h1>
+        <img src="/../public/uploads/{{pelicula.imatge}}" alt="{{pelicula.imatge}}" height="450">
+        <h5>Duracio: {{pelicula.duracio}}</h5>
+        <h5>Genere: {{pelicula.genere}}</h5>
+        <h5>Valoracio: {{pelicula.valoracio}}</h5>
+        <h5>Director: {{pelicula.director.nom}}</h5>
+
+        <h5>Plataformes:</h5>
+        {% if(pelicula.plataforma) %}
+        <ul>
+        {% for plataforma in pelicula.plataforma %}
+            <li style="margin-left:20px"><h6>{{plataforma.nom}}</h6></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <div class="sinopsi">
+            <h5>Sinopsi: </h5>
+            <p>{{pelicula.sinopsi}}</p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

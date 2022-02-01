@@ -30,3 +30,13 @@ tr.encabezado{
 label.labelDirectores{
     margin-left: 50px;
 }
+
+
+label.info{
+    color: blue;
+    display: inline-block;
+}
+
+a{
+    text-decoration: none;
+}
