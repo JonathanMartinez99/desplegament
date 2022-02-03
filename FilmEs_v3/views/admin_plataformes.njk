@@ -32,9 +32,10 @@
 <table>
     {% for plataforma in pelicula.plataforma %}
     <tr>
-        <h3>{{plataforma.nom}}</h3>
-        <form action="/pelicules/{{pelicula.id}}/plataforma" method="post">
-            <input type="hidden" name="_method" value="delete" />          
+        <form action="/pelicules/{{pelicula.id}}/plataforma/esborrar" method="post">
+            <h3>{{plataforma.nom}}</h3>
+            <input type="hidden" readonly value="{{plataforma.nom}}" name="plataforma"/>
+            <input type="hidden" name="_method" value="put" />          
             <button type="submit" class="btn btn-danger">Esborrar</button>
         </form>
     </tr>

@@ -60,7 +60,7 @@ router.post('/', upload.single('imatge'), auth.autenticacion, (request, response
         valoracio:request.body.valoracio,
         genere:request.body.genere,
         director:request.body.director,
-        imatge:request.file.filename,
+        imatge:request.file?.filename,
         plataforma:{
             nom: request.body.nomPlataforma,
             data: request.body.data,
@@ -112,6 +112,25 @@ router.put('/:id/plataforma', auth.autenticacion, (request, response) =>{
     });
 });
 
+router.put('/:id/plataforma/esborrar', auth.autenticacion, (request, response) =>{
+
+    Pelicula.findByIdAndUpdate(request.params.id, {$pull: {
+        plataforma: {
+            nom: request.body.plataforma
+        }
+    }},{new: true}).then(resultado => {
+        if(resultado){
+            response.redirect(request.baseUrl);
+        }
+        else{
+            response.render('admin_error');
+        }
+    }).catch(error => {
+        response.render('admin_error');
+        console.log(error);
+    });
+});
+
 
 //PUT
 
@@ -154,7 +173,6 @@ router.post('/:id', upload.single('imatge'), auth.autenticacion, (request, respo
     
 });
 
-//pull para delete o pop
 
 //DELETE
 
