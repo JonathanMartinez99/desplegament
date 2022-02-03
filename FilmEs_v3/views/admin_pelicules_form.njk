@@ -1,12 +1,12 @@
 {% extends "public_base.njk" %}
-{% block titulo %}Inicio | Peliculas{% endblock %}
+{% block titulo %}Admin | Peliculas{% endblock %}
 {% block contenido %}
 
     {% if(pelicula) %}
     <h1>Editar pel.licula</h1>
 
     <form action="/pelicules/{{pelicula.id}}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_method" value="put" />
+        
         <div class="form-group">
             <label for="titol">Titol:</label>
             <input type="text" class="form-control" name="titol" value="{{pelicula.titol}}"
@@ -26,6 +26,7 @@
         <div class="form-group" style="margin:10px 0px 10px 0px">
             <label for="valoracio">Valoracio:</label>
             <select name="valoracio">
+                <option value="{{pelicula.valoracio}}" selected>{{pelicula.valoracio}}</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -35,6 +36,7 @@
             
             <label for="genere">Genere:</label>
             <select name="genere">
+                <option value="{{pelicula.genere}}" selected>{{pelicula.genere}}</option>
                 <option value="comedia">Comedia</option>
                 <option value="terror">Terror</option>
                 <option value="drama">Drama</option>
@@ -51,7 +53,7 @@
             </select>
         </div>
         
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom:40px">
             <label for="imatge">Imatge:</label>
             <input type="file" class="form-control" name="imatge"
                 placeholder="Imatge de la pel.licula..." />
@@ -59,6 +61,7 @@
         
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
+    <a href="/pelicules/{{pelicula.id}}/plataformes"><button type="submit" class="btn btn-primary">Editar Plataformes</button></a>
     {% else %}
     
 <h1>Insertar pel.licula</h1>
@@ -125,7 +128,7 @@
             </select>
         </div>
         
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom:40px">
             <label for="imatge">Imatge:</label>
             <input type="file" class="form-control" name="imatge"
                 placeholder="Imatge de la pel.licula..." />

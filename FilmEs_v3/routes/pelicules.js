@@ -74,38 +74,33 @@ router.post('/', upload.single('imatge'), auth.autenticacion, (request, response
         response.render('admin_error');
         console.log(error);
     });
-})
+});
 
 
-//PUT
-
-router.put('/:id', upload.single('imatge'), auth.autenticacion, (request, response) =>{
+//MANIPULACION DE PLATAFORMAS
+router.get('/:id/plataformes', auth.autenticacion, (request, response) =>{
     
-    let editada = {
-        titol: request.body.titol,
-            sinopsi: request.body.sinopsi,
-            duracio: request.body.duracio,
-            genere: request.body.genere,
-            valoracio: request.body.valoracio,
-            director: request.body.director
-    }
-    if(request.file.filename !== undefined){
-        editada = {
-            titol: request.body.titol,
-                sinopsi: request.body.sinopsi,
-                duracio: request.body.duracio,
-                genere: request.body.genere,
-                valoracio: request.body.valoracio,
-                director: request.body.director,
-                imatge: request.file.filename
+    Pelicula.findById(request.params.id).then(resultado=>{
+        if(resultado){
+            response.render('admin_plataformes', {pelicula:resultado});
         }
-    }
-    
-    Pelicula.findByIdAndUpdate(request.params.id, {
-        $set: {
-            editada
+        else{
+            response.render('admin_error', {error:'Pel.licula no trobada'});
         }
-    }, {new: true}).then(resultado => {
+    }).catch(error=>{
+        response.render('admin_error');
+    })
+});
+
+router.put('/:id/plataforma', auth.autenticacion, (request, response) =>{
+
+    Pelicula.findByIdAndUpdate(request.params.id, {$push: {
+        plataforma: {
+            nom: request.body.nomPlataforma,
+            data: request.body.data,
+            quantitat: request.body.quantitat
+        }
+    }},{new: true}).then(resultado => {
         if(resultado){
             response.redirect(request.baseUrl);
         }
@@ -115,7 +110,51 @@ router.put('/:id', upload.single('imatge'), auth.autenticacion, (request, respon
     }).catch(error => {
         response.render('admin_error');
     });
-})
+});
+
+
+//PUT
+
+router.post('/:id', upload.single('imatge'), auth.autenticacion, (request, response) =>{
+    
+    let imatge = '';
+
+    Pelicula.findById(request.params.id).then(resultado=>{
+        if(resultado){
+            if(request.file?.filename === undefined){
+                imatge = resultado.imatge;
+            }else{
+                imatge = request.file.filename;
+            }
+
+            Pelicula.findByIdAndUpdate(request.params.id, {
+                $set: {
+                    titol: request.body.titol,
+                    sinopsi: request.body.sinopsi,
+                    duracio: request.body.duracio,
+                    genere: request.body.genere,
+                    valoracio: request.body.valoracio,
+                    director: request.body.director,
+                    imatge: imatge
+                }
+            }, {new: true}).then(resultado => {
+                if(resultado){
+                    response.redirect(request.baseUrl);
+                }
+                else{
+                    response.render('admin_error');
+                }
+            }).catch(error => {
+                response.render('admin_error');
+            });
+        }
+    }).catch(error =>{
+        console.log(error);
+    });
+    
+});
+
+//pull para delete o pop
 
 //DELETE
 

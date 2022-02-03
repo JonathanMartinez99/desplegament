@@ -1,0 +1,46 @@
+{% extends "public_base.njk" %}
+{% block titulo %}Admin | Plataformes{% endblock %}
+{% block contenido %}
+
+<div class="container">
+    <h1>Insertar plataformes</h1>
+    <form action="/pelicules/{{pelicula.id}}/plataforma" method="post">
+        <input type="hidden" name="_method" value="put" />
+
+        <div class="form-group" style="margin:30px 0px 30px 0px">
+            <label for="nomPlataforma">Nom Plataforma:</label>
+            <input type="text" class="form-control" name="nomPlataforma" value=""
+                placeholder="Sinopsi de la pel.licula..." />
+            
+            <label for="data">Data Plataforma:</label>
+            <input type="date" class="form-control" name="data" value=""
+                placeholder="Data de la pel.licula..." />
+            
+
+            <label for="quantitat">Quantitat Plataforma:</label>
+            <select name="quantitat">
+                <option value="false">No</option>
+                <option value="true">Si</option>
+            </select>
+        </div>          
+         
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+    <h1>Esborrar plataformes</h1>
+
+<table>
+    {% for plataforma in pelicula.plataforma %}
+    <tr>
+        <h3>{{plataforma.nom}}</h3>
+        <form action="/pelicules/{{pelicula.id}}/plataforma" method="post">
+            <input type="hidden" name="_method" value="delete" />          
+            <button type="submit" class="btn btn-danger">Esborrar</button>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+{% endblock %}
